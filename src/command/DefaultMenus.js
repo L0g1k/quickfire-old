@@ -53,8 +53,12 @@ define(function (require, exports, module) {
         menu.addMenuItem(Commands.FILE_SAVE);
         menu.addMenuItem(Commands.FILE_SAVE_ALL);
         menu.addMenuDivider();
-        menu.addMenuItem(Commands.FILE_LIVE_FILE_PREVIEW);
-        menu.addMenuItem(Commands.FILE_LIVE_HIGHLIGHT);
+
+        if (!brackets.inBrowser) {
+            menu.addMenuItem(Commands.FILE_LIVE_FILE_PREVIEW);
+            menu.addMenuItem(Commands.FILE_LIVE_HIGHLIGHT);
+        }
+
         menu.addMenuItem(Commands.FILE_PROJECT_SETTINGS);
         menu.addMenuDivider();
         menu.addMenuItem(Commands.FILE_INSTALL_EXTENSION);
@@ -137,7 +141,10 @@ define(function (require, exports, module) {
          * Help menu
          */
         menu = Menus.addMenu(Strings.HELP_MENU, Menus.AppMenuBar.HELP_MENU);
-        menu.addMenuItem(Commands.HELP_CHECK_FOR_UPDATE);
+
+        if (!brackets.inBrowser) {
+            menu.addMenuItem(Commands.HELP_CHECK_FOR_UPDATE);
+        }
 
         menu.addMenuDivider();
         if (brackets.config.how_to_use_url) {

@@ -46,7 +46,7 @@ define(function (require, exports, module) {
     var _init       = false,
         /** @type {Object<string, Object>}  Stores require.js contexts of extensions */
         contexts    = {},
-        srcPath     = FileUtils.getNativeBracketsDirectoryPath();
+        srcPath     = window.location.pathname.substr(0, window.location.pathname.lastIndexOf("/"))/*FileUtils.getNativeBracketsDirectoryPath()*/;
     
     // The native directory path ends with either "test" or "src". We need "src" to
     // load the text and i18n modules.

@@ -34,7 +34,8 @@
 define(function (require, exports, module) {
     "use strict";
     
-    var configJSON = require("text!config.json");
+    var configJSON  = require("text!config.json"),
+        NativeProxy = require("nativeProxy/NativeProxy");
     
     // Define core brackets namespace if it isn't already defined
     //
@@ -48,7 +49,15 @@ define(function (require, exports, module) {
     // var Fn = Function, global = (new Fn("return this"))();
     var Fn = Function, global = window;
     if (!global.brackets) {
+        // Since brackets-shell defines global.brackets, this only happens when Brackets is
+        // launched without the shell, e.g., from a web browser.
         global.brackets = {};
+        global.brackets.inBrowser = true;
+
+        // initialize the proxy connection - this will define brackets.app and brackets.fs
+        NativeProxy.init();
+    } else {
+        global.brackets.inBrowser = false;
     }
     window.localStorage = {
         getItem: function() { return ''}, setItem: function() { }
@@ -70,9 +79,6 @@ define(function (require, exports, module) {
     // Load native shell when brackets is run in a native shell rather than the browser
     // TODO: (issue #266) load conditionally
     global.brackets.shellAPI = require("utils/ShellAPI");
-    
-    global.brackets.inBrowser = false;
-    // global.brackets.inBrowser = !global.brackets.hasOwnProperty("fs");
     
     if (global.navigator.platform === "MacIntel" || global.navigator.platform === "MacPPC") {
         global.brackets.platform = "mac";

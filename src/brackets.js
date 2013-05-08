@@ -21,9 +21,11 @@
  * 
  */
 
-
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
 /*global require, define, brackets: true, $, PathUtils, window, navigator, Mustache */
+
+// get a startup timestamp as soon as possible
+window._startupTime = new Date().getTime();
 
 require.config({
     paths: {
@@ -59,6 +61,7 @@ define(function (require, exports, module) {
     
     // Load dependent modules
     var Global                  = require("utils/Global"),
+        NativeProxyUI           = require("nativeProxy/NativeProxyUI"),
         AppInit                 = require("utils/AppInit"),
         LanguageManager         = require("language/LanguageManager"),
         ProjectManager          = require("project/ProjectManager"),
@@ -94,6 +97,11 @@ define(function (require, exports, module) {
         LiveDevelopmentMain     = require("LiveDevelopment/main"),
         NodeConnection          = require("utils/NodeConnection"),
         ExtensionUtils          = require("utils/ExtensionUtils");
+
+    // load the proxy if running in browser
+    if (brackets.inBrowser) {
+        NativeProxyUI.init();
+    }
             
     // Load modules that self-register and just need to get included in the main project
     require("command/DefaultMenus");

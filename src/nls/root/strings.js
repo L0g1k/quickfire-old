@@ -61,6 +61,8 @@ define({
     // Application error strings
     "ERROR_IN_BROWSER_TITLE"            : "Oops! {APP_NAME} doesn't run in browsers yet.",
     "ERROR_IN_BROWSER"                  : "{APP_NAME} is built in HTML, but right now it runs as a desktop app so you can use it to edit local files. Please use the application shell in the <b>github.com/adobe/brackets-shell</b> repo to run {APP_NAME}.",
+    "ERROR_PROXY_SERVER_TITLE"          : "Could not connect to the Node Proxy Server.",
+    "ERROR_PROXY_SERVER"                : "Please ensure that the Node Proxy Server is running on port 9000 on your web server and that your firewall is configured to allow traffic to the server.",
 
     // FileIndexManager error string
     "ERROR_MAX_FILES_TITLE"             : "Error Indexing Files",
@@ -93,6 +95,10 @@ define({
     "LIVE_DEV_NAVIGATED_AWAY"                  : "Live Preview was cancelled because the browser navigated to a page that is not part of the current project",
     "LIVE_DEV_CLOSED_UNKNOWN_REASON"           : "Live Preview was cancelled for an unknown reason ({0})",
     
+    "OPEN_FOLDER_TITLE"                 : "Open Folder",
+    "OPEN_FOLDER_MESSAGE"               : "Please enter the path of a folder to open:",
+    "OPEN_FILE_TITLE"                   : "Open File",
+    "OPEN_FILE_MESSAGE"                 : "Please enter the path of a file to open:",
     "SAVE_CLOSE_TITLE"                  : "Save Changes",
     "SAVE_CLOSE_MESSAGE"                : "Do you want to save the changes you made in the document <span class='dialog-filename'>{0}</span>?",
     "SAVE_CLOSE_MULTI_MESSAGE"          : "Do you want to save your changes to the following files?",
@@ -283,6 +289,7 @@ define({
     "DEVELOPMENT_BUILD"                    : "development build",
     "SEARCH_RESULTS"                       : "Search Results",
     "OK"                                   : "OK",
+    "RETRY"                                : "Retry",
     "DONT_SAVE"                            : "Don't Save",
     "SAVE"                                 : "Save",
     "CANCEL"                               : "Cancel",
