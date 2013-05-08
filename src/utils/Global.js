@@ -45,9 +45,13 @@ define(function (require, exports, module) {
     //
     // Taken from:
     //   http://stackoverflow.com/questions/3277182/how-to-get-the-global-object-in-javascript
-    var Fn = Function, global = (new Fn("return this"))();
+    // var Fn = Function, global = (new Fn("return this"))();
+    var Fn = Function, global = window;
     if (!global.brackets) {
         global.brackets = {};
+    }
+    window.localStorage = {
+        getItem: function() { return ''}, setItem: function() { }
     }
     
     // Parse src/config.json
@@ -67,7 +71,8 @@ define(function (require, exports, module) {
     // TODO: (issue #266) load conditionally
     global.brackets.shellAPI = require("utils/ShellAPI");
     
-    global.brackets.inBrowser = !global.brackets.hasOwnProperty("fs");
+    global.brackets.inBrowser = false;
+    // global.brackets.inBrowser = !global.brackets.hasOwnProperty("fs");
     
     if (global.navigator.platform === "MacIntel" || global.navigator.platform === "MacPPC") {
         global.brackets.platform = "mac";
@@ -83,7 +88,8 @@ define(function (require, exports, module) {
     
     global.brackets.getLocale = function () {
         // By default use the locale that was determined in brackets.js
-        return global.localStorage.getItem("locale") || global.require.s.contexts._.config.locale;
+        //return global.localStorage.getItem("locale") || global.require.s.contexts._.config.locale;
+        return "en";
     };
 
     global.brackets.setLocale = function (locale) {
@@ -96,7 +102,12 @@ define(function (require, exports, module) {
     
     // Create empty app namespace if running in-browser
     if (!global.brackets.app) {
-        global.brackets.app = {};
+        global.brackets.app = {
+            addMenu: function() { console.log("Adding menu")},
+            addMenuItem: function() { console.log("Adding menu item")},
+            setMenuItemState: function() { console.log("Setting menu item state")},
+            setMenuTitle: function() { console.log("Setting menu title")}
+        };
     }
     
     // Loading extensions requires creating new require.js contexts, which

@@ -47,7 +47,8 @@ define(function (require, exports, module) {
     var _buildNumber = Number(/-([0-9]+)/.exec(brackets.metadata.version)[1]);
     
     // PreferenceStorage
-    var _prefs = PreferencesManager.getPreferenceStorage(module, defaultPrefs);
+    //var _prefs = PreferencesManager.getPreferenceStorage(module, defaultPrefs);
+    var _prefs = { getValue: function() { return '' }};
     //TODO: Remove preferences migration code
     PreferencesManager.handleClientIdChange(_prefs, module.id);
     

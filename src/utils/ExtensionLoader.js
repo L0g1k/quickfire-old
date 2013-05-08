@@ -64,7 +64,8 @@ define(function (require, exports, module) {
      * C:\Users\<user>\AppData\Roaming\Brackets\extensions\user on windows.
      */
     function getUserExtensionPath() {
-        return brackets.app.getApplicationSupportDirectory() + "/extensions/user";
+        //return brackets.app.getApplicationSupportDirectory() + "/extensions/user";
+        return "/Users/<user>/Application Support/Brackets/extensions/user";
     }
     
     /**

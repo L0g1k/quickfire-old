@@ -32,6 +32,10 @@
 define(function (require, exports, module) {
     "use strict";
     
+    var localStorage = {
+        getItem: function() { return '{}'}, setItem: function() { }
+    };
+
     var PreferenceStorage = require("preferences/PreferenceStorage").PreferenceStorage,
         FileUtils         = require("file/FileUtils"),
         ExtensionLoader   = require("utils/ExtensionLoader"),
