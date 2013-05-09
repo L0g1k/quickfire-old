@@ -61,7 +61,7 @@ define(function (require, exports, module) {
         callback(-2);
     }
 
-    exports.language = window.localStorage.getItem("locale") || navigator.language;
+    exports.language = navigator.language || window.localStorage.getItem("locale");
 
     exports.quit                            = quit;
     exports.abortQuit                       = abortQuit;
