@@ -170,15 +170,6 @@ define(function (require, exports, module) {
         
         EditorManager.setEditorHolder($("#editor-holder"));
 
-        // Let the user know Brackets doesn't run in a web browser yet
-        if (brackets.inBrowser) {
-            Dialogs.showModalDialog(
-                Dialogs.DIALOG_ID_ERROR,
-                Strings.ERROR_IN_BROWSER_TITLE,
-                Strings.ERROR_IN_BROWSER
-            );
-        }
-
         // Use quiet scrollbars if we aren't on Lion. If we're on Lion, only
         // use native scroll bars when the mouse is not plugged in or when
         // using the "Always" scroll bar setting. 
@@ -193,7 +184,6 @@ define(function (require, exports, module) {
             
             $testDiv.remove();
         }
-/*
         // Load default languages
         LanguageManager.ready.always(function () {
             // Load all extensions. This promise will complete even if one or more
@@ -258,7 +248,6 @@ define(function (require, exports, module) {
             window.setInterval(UpdateNotification.checkForUpdate, 86520000);
             UpdateNotification.checkForUpdate();
         }
-        */
     }
     
     /**
