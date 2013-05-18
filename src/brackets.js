@@ -96,12 +96,15 @@ define(function (require, exports, module) {
         Resizer                 = require("utils/Resizer"),
         LiveDevelopmentMain     = require("LiveDevelopment/main"),
         NodeConnection          = require("utils/NodeConnection"),
-        ExtensionUtils          = require("utils/ExtensionUtils");
-
+        ExtensionUtils          = require("utils/ExtensionUtils"),
+        ChromeFileSystemUI      = require("chrome/chromeFileSystem/ChromeFileSystemUI"),
+        ChromeFileSystem      = require("chrome/chromeFileSystem/ChromeFileSystem");
     // load the proxy if running in browser
-    if (brackets.inBrowser) {
+    if (brackets.isChromeApp)
+        ChromeFileSystemUI.init();
+    else if (brackets.inBrowser)
         NativeProxyUI.init();
-    }
+
             
     // Load modules that self-register and just need to get included in the main project
     require("command/DefaultMenus");
@@ -325,5 +328,12 @@ define(function (require, exports, module) {
     _beforeHTMLReady();
     AppInit._dispatchReady(AppInit.HTML_READY);
 
-    $(window.document).ready(_onReady);
+    $(window.document).ready(function(){
+        var ready = _onReady;
+         if(brackets.chromeApp) {
+             ChromeFileSystem.ready(function(){
+                 ready();
+             });
+         } else ready();
+    });
 });

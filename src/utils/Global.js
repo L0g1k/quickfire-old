@@ -35,8 +35,8 @@ define(function (require, exports, module) {
     "use strict";
     
     var configJSON  = require("text!config.json"),
-        NativeProxy = require("nativeProxy/NativeProxy");
-    
+        NativeProxy = require("nativeProxy/NativeProxy"),
+        ChromeFileSystem = require("chrome/chromeFileSystem/ChromeFileSystem");
     // Define core brackets namespace if it isn't already defined
     //
     // We can't simply do 'brackets = {}' to define it in the global namespace because
@@ -53,9 +53,12 @@ define(function (require, exports, module) {
         // launched without the shell, e.g., from a web browser.
         global.brackets = {};
         global.brackets.inBrowser = true;
-
+        global.brackets.chromeApp = true; // TODO: This would be better to actually deduce somehow
         // initialize the proxy connection - this will define brackets.app and brackets.fs
-        NativeProxy.init();
+        if(global.brackets.chromeApp)
+            ChromeFileSystem.init();
+          else
+            NativeProxy.init();
     } else {
         global.brackets.inBrowser = false;
     }
@@ -95,7 +98,9 @@ define(function (require, exports, module) {
     global.brackets.getLocale = function () {
         // By default use the locale that was determined in brackets.js
         //return global.localStorage.getItem("locale") || global.require.s.contexts._.config.locale;
-        return "en";
+        return global.brackets.chromeApp ?
+            window.navigator.language :
+            (global.localStorage.getItem("locale") || global.require.s.contexts._.config.locale);
     };
 
     global.brackets.setLocale = function (locale) {
