@@ -261,6 +261,7 @@ define(function (require, exports, module) {
     
     exports.DIALOG_ID_ERROR             = DIALOG_ID_ERROR;
     exports.DIALOG_ID_INFO              = DIALOG_ID_INFO;
+    exports.DIALOG_ID_OPEN_FOLDER       = DIALOG_ID_OPEN_FOLDER;
     exports.DIALOG_ID_SAVE_CLOSE        = DIALOG_ID_SAVE_CLOSE;
     exports.DIALOG_ID_EXT_CHANGED       = DIALOG_ID_EXT_CHANGED;
     exports.DIALOG_ID_EXT_DELETED       = DIALOG_ID_EXT_DELETED;

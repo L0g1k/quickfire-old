@@ -1,0 +1,19 @@
+{
+    "name": "Quickfire",
+    "version": "0.0",
+    "manifest_version": 2,
+    "description": "The fastest way to code HTML websites",
+    "icons": {
+        "128": "src/chrome/img/icon_128.png"
+    },
+    "app": {
+        "background": {
+            "scripts": [
+                "syncfs-editor/js/background.js", "src/chrome/background.js" /*,
+                "chrome-websocket/bundle.js",
+                "chrome-websocket/websocket-server.js",
+                "chrome-webserver/webserver.js"*/]
+        }
+    },
+    "permissions": [{"socket":["tcp-connect", "tcp-listen"]}, "syncFileSystem"]
+}

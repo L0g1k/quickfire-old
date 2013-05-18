@@ -16,3 +16,9 @@
 [submodule "src/extensions/default/JavaScriptCodeHints/thirdparty/acorn"]
 	path = src/extensions/default/JavaScriptCodeHints/thirdparty/acorn
 	url = https://github.com/marijnh/acorn.git
+[submodule "chrome-webserver"]
+	path = chrome-webserver
+	url = git@github.com:L0g1k/chrome-webserver.git
+[submodule "chrome-websocket"]
+	path = chrome-websocket
+	url = git@github.com:L0g1k/chrome-websocket.git
