@@ -51,7 +51,6 @@ define(function (require, exports, module) {
                 for(var i=0; i<entries.length; i++) {
                     returnArray.push(entries[i].name);
                 }
-                debugger;
                 callback(undefined, returnArray);
             });
         }, function(error){
@@ -132,30 +131,24 @@ define(function (require, exports, module) {
 
     function writeFile(path, data, encoding, callback) {
 
-        this.filesystem.root.getFile(
-            path, { create: false },
+        fileSystem.root.getFile(
+            path, { create: true },
             function(entry) {
                 entry.createWriter(function (writer) {
                     writer.truncate(0);
-                    writer.onerror = error.bind(null, 'writer.truncate');
+                    writer.onerror = function(err) {
+                        callback(err.code)
+                    }
                     writer.onwriteend = function() {
-                        var content = this.getContent();
-                        var blob = new Blob([content]);
-                        var size = content.length;
+                        var blob = new Blob([data]);
+                        var size = data.length;
                         writer.write(blob);
-                        writer.onerror = error;
                         writer.onwriteend = function(){
-                            callback();
+                            callback(brackets.fs.NO_ERROR);
                         };
                     }.bind(this);
                 }.bind(this));
             }.bind(this));
-
-        fileSystem.root.getFile(path, { create: false }, function(fileEntry){
-            callback(undefined, fileEntry);
-        }, function (error){
-            callback.err(error);
-        });
         //return ChromeFileSystem.send("fs", "writeFile", path, data, encoding, callback);
     }
 
