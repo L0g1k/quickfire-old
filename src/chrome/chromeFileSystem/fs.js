@@ -25,7 +25,11 @@ define(function (require, exports, module) {
         });
     }
     function readdir(path, callback) {
+<<<<<<< HEAD
         if(isLegacySystemPath(path)) {
+=======
+        if(path.indexOf('\.') == 0) {
+>>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
             ChromeFileSystem.send("fs", "readdir", path, callback);
         }  else fileSystem.root.getDirectory(path, { create: false}, function(directory){
             directory.createReader().readEntries(function(entries){
@@ -37,13 +41,21 @@ define(function (require, exports, module) {
                 callback(undefined, returnArray);
             });
         }, function(error){
+<<<<<<< HEAD
                 callback(error)
+=======
+
+>>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
         });
        // return ChromeFileSystem.send("fs", "readdir", path, callback);
     }
 
     function stat(path, callback) {
+<<<<<<< HEAD
         if(isLegacySystemPath(path)) {
+=======
+        if(path.indexOf('\.') == 0 || path.indexOf('/Users/') == 0) {
+>>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
             ChromeFileSystem.send("fs", "stat", path, function (err, statData) {
                 if (statData && callback) {
                     statData.isFile = function () { return statData._isFile; };
@@ -65,8 +77,12 @@ define(function (require, exports, module) {
             if(callback) {
                 callback(err, {
                     isFile: function() { return !StringUtils.endsWith(path, '\.')},
+<<<<<<< HEAD
                     isDirectory: function() { return StringUtils.endsWith(path, '\.')},
                     mtime: file.lastModifiedDate
+=======
+                    isDirectory: function() { return StringUtils.endsWith(path, '\.')}
+>>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
                 })
             }
         });
@@ -91,10 +107,13 @@ define(function (require, exports, module) {
 
     }
 
+<<<<<<< HEAD
     function isLegacySystemPath(path) {
         return path.indexOf('\.') == 0 || path.indexOf('/Users/') == 0;
     }
 
+=======
+>>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
     function locateFile (uri, callback) {
         console.log("Trying to locate file " + uri);
         return locateFileInDirectory(uri, root, callback);
@@ -126,6 +145,7 @@ define(function (require, exports, module) {
     }
 
     function readFile(path, encoding, callback) {
+<<<<<<< HEAD
         if(isLegacySystemPath(path))
             ChromeFileSystem.send("fs", "readFile", path, encoding, callback);
         else {
@@ -147,6 +167,9 @@ define(function (require, exports, module) {
                 callback(brackets.ERR_UNKNOWN);
             });
         }
+=======
+        return ChromeFileSystem.send("fs", "readFile", path, encoding, callback);
+>>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
     }
 
     function writeFile(path, data, encoding, callback) {

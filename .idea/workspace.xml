@@ -2,25 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2e03d03-4b0a-4063-972d-5101142f7ddc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chrome-webserver" afterPath="$PROJECT_DIR$/chrome-webserver" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chrome-websocket" afterPath="$PROJECT_DIR$/chrome-websocket" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/chrome-webserver" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/chrome-websocket" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/chrome/chromeFileSystem/ChromeFileSystem.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/chrome/chromeFileSystem/ChromeFileSystemUI.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/chrome/chromeFileSystem/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/chrome/chromeFileSystem/fs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitmodules" afterPath="$PROJECT_DIR$/.gitmodules" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/widgets/Dialogs.js" afterPath="$PROJECT_DIR$/src/widgets/Dialogs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/Global.js" afterPath="$PROJECT_DIR$/src/utils/Global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nativeProxy/NativeProxyUI.js" afterPath="$PROJECT_DIR$/src/nativeProxy/NativeProxyUI.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/project/ProjectManager.js" afterPath="$PROJECT_DIR$/src/project/ProjectManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/chrome/background.js" afterPath="$PROJECT_DIR$/src/chrome/background.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/brackets.js" afterPath="$PROJECT_DIR$/src/brackets.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.html" afterPath="$PROJECT_DIR$/src/main.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\workspace-chrome\brackets\src\manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
     </list>
     <ignored path="brackets.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368959371135" ignored="false" />
+    <file path="/Dummy.txt" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368860584249" ignored="false" />
     <file path="/main.html" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368842639876" ignored="false" />
     <file path="/manifest.json" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368843274199" ignored="false" />
-    <file path="/a.dummy" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368943793583" ignored="false" />
+    <file path="/a.dummy" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368865473743" ignored="false" />
     <file path="/brackets.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368853377118" ignored="false" />
     <file path="/chrome-detector.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368844371878" ignored="false" />
     <file path="/Global.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368844738366" ignored="false" />
-    <file path="/fs.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368954711707" ignored="false" />
+    <file path="/fs.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368866624130" ignored="false" />
     <file path="/ChromeFileSystem.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368853322639" ignored="false" />
     <file path="/ProjectManager.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368855699373" ignored="false" />
-    <file path="/syncFileSystem.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368960592099" ignored="false" />
-    <file path="/filer.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368950237606" ignored="false" />
-    <file path="$PROJECT_DIR$/../chrome-webserver/webserver.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368959345142" ignored="false" />
-    <file path="/webserver.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368961394943" ignored="false" />
+    <file path="/syncFileSystem.js" changelist="b2e03d03-4b0a-4063-972d-5101142f7ddc" time="1368862197789" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,46 +51,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fs.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="fs.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/chrome/chromeFileSystem/fs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="28" selection-start="5724" selection-end="5972" vertical-scroll-proportion="0.0">
+            <state line="36" column="36" selection-start="1298" selection-end="1298" vertical-scroll-proportion="0.8440367">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="webserver.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/chrome-webserver/webserver.js">
+      <file leaf-file-name="ProjectManager.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/project/ProjectManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="19" selection-start="12" selection-end="12" vertical-scroll-proportion="-330.1579">
+            <state line="1388" column="69" selection-start="58333" selection-end="58333" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filer.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/syncfs-editor/js/filer.js">
+      <file leaf-file-name="brackets.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/brackets.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="162" column="12" selection-start="5427" selection-end="5427" vertical-scroll-proportion="-5.0">
-              <folding />
+            <state line="198" column="41" selection-start="10162" selection-end="10162" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1368853410324" expanded="false" signature="9279:9342" placeholder="..." />
+                <marker date="1368853410324" expanded="false" signature="9356:9381" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editor.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/syncfs-editor/js/editor.js">
+      <file leaf-file-name="syncFileSystem.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chrome-webserver/syncFileSystem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="19" selection-start="2300" selection-end="2504" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NativeFileSystem.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/file/NativeFileSystem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1140" column="82" selection-start="47196" selection-end="47200" vertical-scroll-proportion="0.0">
+            <state line="35" column="41" selection-start="248" selection-end="1383" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -88,45 +93,7 @@
       <file leaf-file-name="manifest.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="53" selection-start="493" selection-end="493" vertical-scroll-proportion="-9.153846">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="syncFileSystem.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chrome-webserver/syncFileSystem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="19" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="websocket-server.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chrome-websocket/websocket-server.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="202" column="34" selection-start="6286" selection-end="6286" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="node.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chrome-webserver/node.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5744" column="102" selection-start="0" selection-end="206842" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bundle.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chrome-websocket/bundle.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="1" column="39" selection-start="26" selection-end="26" vertical-scroll-proportion="-0.65384614">
               <folding />
             </state>
           </provider>
@@ -150,6 +117,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/src/chrome/js/lib/mustache-chrome.min.js" />
+        <option value="$PROJECT_DIR$/src/chrome/js/lib/mustache-chrome.js" />
+        <option value="$PROJECT_DIR$/src/chrome/background.js" />
+        <option value="$PROJECT_DIR$/src/nativeProxy/NativeProxyUI.js" />
         <option value="$PROJECT_DIR$/src/widgets/Dialogs.js" />
         <option value="$PROJECT_DIR$/src/chrome/js/chrome-detector.js" />
         <option value="$PROJECT_DIR$/src/utils/Global.js" />
@@ -159,13 +130,9 @@
         <option value="$PROJECT_DIR$/src/project/ProjectManager.js" />
         <option value="$PROJECT_DIR$/syncfs-editor/js/background.js" />
         <option value="$PROJECT_DIR$/src/main.html" />
-        <option value="$PROJECT_DIR$/syncfs-editor/js/filer.js" />
-        <option value="$PROJECT_DIR$/src/chrome/chromeFileSystem/fs.js" />
-        <option value="$PROJECT_DIR$/chrome-webserver/node.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
-        <option value="$PROJECT_DIR$/chrome-websocket/websocket-server.js" />
         <option value="$PROJECT_DIR$/chrome-webserver/syncFileSystem.js" />
-        <option value="$PROJECT_DIR$/chrome-webserver/webserver.js" />
+        <option value="$PROJECT_DIR$/src/chrome/chromeFileSystem/fs.js" />
       </list>
     </option>
   </component>
@@ -227,20 +194,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="chrome-websocket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brackets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="brackets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="chrome-webserver" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -251,29 +204,12 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="156" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="155" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="156" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../chrome-webserver" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="156" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="830" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="830" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="156" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="155" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.5-src/core-modules-sources/lib/fs.js" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\workspace-chrome\brackets\chrome-webserver" />
       <recent name="D:\workspace-chrome\brackets" />
       <recent name="D:\workspace-chrome\brackets\src\chrome" />
       <recent name="D:\workspace-chrome\brackets\src\chrome\img" />
@@ -322,14 +258,14 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3502627" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40105078" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25244913" sideWeight="0.67075306" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25244913" sideWeight="0.5989492" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924694" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -399,9 +335,69 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/nativeProxy/NativeProxy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="24" selection-start="2288" selection-end="2304" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/file/FileUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.9438944">
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/Global.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="87" selection-start="2920" selection-end="2920" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/file/NativeFileSystem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="971" column="31" selection-start="40091" selection-end="40098" vertical-scroll-proportion="-3.3">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/StringUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="66" selection-start="1310" selection-end="1310" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/syncfs-editor/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/syncfs-editor/js/background.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/chrome-app-samples/syncfs-editor/js/fileSystems/syncFileSystem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="79" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/syncfs-editor/js/filer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="28" selection-start="2337" selection-end="2346" vertical-scroll-proportion="3.48">
           <folding />
         </state>
       </provider>
@@ -420,6 +416,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="39" selection-start="26" selection-end="26" vertical-scroll-proportion="-0.65384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chrome-webserver/syncFileSystem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="41" selection-start="248" selection-end="1383" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/project/ProjectManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1388" column="69" selection-start="58333" selection-end="58333" vertical-scroll-proportion="0.0">
@@ -431,89 +441,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="198" column="41" selection-start="10162" selection-end="10162" vertical-scroll-proportion="0.0">
           <folding>
-            <marker date="1368853410324" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1368853410324" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1368853410324" expanded="false" signature="9279:9342" placeholder="..." />
+            <marker date="1368853410324" expanded="false" signature="9356:9381" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/file/NativeFileSystem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1140" column="82" selection-start="47196" selection-end="47200" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nativeProxy/fs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="17" selection-start="1594" selection-end="1594" vertical-scroll-proportion="0.14782609">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/syncfs-editor/js/filer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="12" selection-start="5427" selection-end="5427" vertical-scroll-proportion="-5.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/syncfs-editor/js/editor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="19" selection-start="2300" selection-end="2504" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-websocket/bundle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-webserver/node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5744" column="102" selection-start="0" selection-end="206842" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="53" selection-start="493" selection-end="493" vertical-scroll-proportion="-9.153846">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/chrome/chromeFileSystem/fs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="28" selection-start="5724" selection-end="5972" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-websocket/websocket-server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="34" selection-start="6286" selection-end="6286" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-webserver/syncFileSystem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="19" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chrome-webserver/webserver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="19" selection-start="12" selection-end="12" vertical-scroll-proportion="-330.1579">
+        <state line="36" column="36" selection-start="1298" selection-end="1298" vertical-scroll-proportion="0.8440367">
           <folding />
         </state>
       </provider>
