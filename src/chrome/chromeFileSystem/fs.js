@@ -24,10 +24,28 @@ define(function (require, exports, module) {
             callback();
         });
     }
+
+    function locateFile (uri, callback) {
+
+        console.log("Trying to locate file " + uri);
+
+        if(StringUtils.endsWith(uri, '/')) {
+            callback(fileSystem.root.fullPath == uri ? fileSystem.root : fileSystem.root.getDirectory(uri));
+        } else fileSystem.root.getFile(uri, {create: false},
+            function(file) {
+                callback(file);
+            },
+            function(err) {
+                callback(null);
+                console.log(err)
+            }
+        );
+    }
+
     function readdir(path, callback) {
         if(isLegacySystemPath(path)) {
             ChromeFileSystem.send("fs", "readdir", path, callback);
-        }  else fileSystem.root.getDirectory(path, { create: false}, function(directory){
+        }  else fileSystem.root.getDirectory(path, { create: false }, function(directory){
             directory.createReader().readEntries(function(entries){
                 var returnArray = [];
                 for(var i=0; i<entries.length; i++) {
@@ -39,7 +57,6 @@ define(function (require, exports, module) {
         }, function(error){
                 callback(error)
         });
-       // return ChromeFileSystem.send("fs", "readdir", path, callback);
     }
 
     function stat(path, callback) {
@@ -60,69 +77,33 @@ define(function (require, exports, module) {
                     callback(err, statData);
                 }
             });
-        }  else locateFileInDirectory(path, fileSystem.root, function(file) {
-            var err = file!=null ? brackets.fs.NO_ERROR : brackets.fs.ERR_NOT_FOUND;
-            if(callback) {
-                callback(err, {
-                    isFile: function() { return !StringUtils.endsWith(path, '\.')},
-                    isDirectory: function() { return StringUtils.endsWith(path, '\.')},
-                    mtime: file.lastModifiedDate
-                })
-            }
-        });
+        }  else  {
+            locateFile(path, function(fileEntry) {
+                if(fileEntry == null) {
+                    callback(brackets.fs.ERR_NOT_FOUND)
+                } else {
+                    if(fileEntry.isDirectory) {
 
-        /*
-        ChromeFileSystem.send("fs", "stat", path, function (err, statData) {
-            if (statData && callback) {
-                statData.isFile = function () { return statData._isFile; };
-                statData.isDirectory = function () { return statData._isDirectory; };
-                statData.isBlockDevice = function () { return statData._isBlockDevice; };
-                statData.isCharacterDevice = function () { return statData._isCharacterDevice; };
-                statData.isFIFO = function () { return statData._isFIFO; };
-                statData.isSocket = function () { return statData._isSocket; };
-                statData.atime = new Date(statData.atime);
-                statData.mtime = new Date(statData.mtime);
-                statData.ctime = new Date(statData.ctime);
-            }
-            if (callback) {
-                callback(err, statData);
-            }
-        });*/
+                        callback(brackets.fs.NO_ERROR, {
+                            isFile: function() { return false },
+                            isDirectory: function() { return true },
+                            mtime: new Date()
+                        })
+                    } else fileEntry.file(function(file){
+                        callback(brackets.fs.NO_ERROR, {
+                            isFile: function() { return true },
+                            isDirectory: function() { return false },
+                            mtime: file.lastModifiedDate
+                        })
+                    });
 
+                }
+            });
+        }
     }
 
     function isLegacySystemPath(path) {
         return path.indexOf('\.') == 0 || path.indexOf('/Users/') == 0;
-    }
-
-    function locateFile (uri, callback) {
-        console.log("Trying to locate file " + uri);
-        return locateFileInDirectory(uri, root, callback);
-    }
-
-     function locateFileInDirectory (name, directory, callback) {
-        var found = false
-        if(StringUtils.endsWith(name, '/')) {
-            callback(directory.fullPath == name ? directory : directory.getDirectory(name));
-        } else directory.createReader().readEntries(function (entries) {
-            for(var i = 0; i < entries.length; i++) {
-                var entry = entries[i];
-                if (typeof entry !== 'undefined') {
-                    console.log("Found entry " + entry.name);
-                    if (entry.isFile) {
-                        if (entry.fullPath == name) {
-                            found = true;
-                            entry.file(callback);
-                        }
-                    } else {
-                        locateFileInDirectory(name, directory, callback);
-                    }
-                }
-            }
-            // Hacky way to determine if the file wasn't found.
-            setTimeout(function() { if(!found) callback(null)}, 500);
-        });
-
     }
 
     function readFile(path, encoding, callback) {
@@ -150,7 +131,27 @@ define(function (require, exports, module) {
     }
 
     function writeFile(path, data, encoding, callback) {
-        fileSystem.root.getFile(path, { create: true}, function(fileEntry){
+
+        this.filesystem.root.getFile(
+            path, { create: false },
+            function(entry) {
+                entry.createWriter(function (writer) {
+                    writer.truncate(0);
+                    writer.onerror = error.bind(null, 'writer.truncate');
+                    writer.onwriteend = function() {
+                        var content = this.getContent();
+                        var blob = new Blob([content]);
+                        var size = content.length;
+                        writer.write(blob);
+                        writer.onerror = error;
+                        writer.onwriteend = function(){
+                            callback();
+                        };
+                    }.bind(this);
+                }.bind(this));
+            }.bind(this));
+
+        fileSystem.root.getFile(path, { create: false }, function(fileEntry){
             callback(undefined, fileEntry);
         }, function (error){
             callback.err(error);
