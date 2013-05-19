@@ -9,17 +9,10 @@
     "app": {
         "background": {
             "scripts": [
-<<<<<<< HEAD
                 "syncfs-editor/js/background.js", "src/chrome/background.js",
                 "chrome-websocket/bundle.js",
                 "chrome-websocket/websocket-server.js",
                 "chrome-webserver/webserver.js"]
-=======
-                "syncfs-editor/js/background.js", "src/chrome/background.js" /*,
-                "chrome-websocket/bundle.js",
-                "chrome-websocket/websocket-server.js",
-                "chrome-webserver/webserver.js"*/]
->>>>>>> 21baad040b148449444cf7dcdfe36cf5e200c2bf
         }
     },
     "permissions": [{"socket":["tcp-connect", "tcp-listen"]}, "syncFileSystem"]
