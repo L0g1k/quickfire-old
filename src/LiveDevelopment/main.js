@@ -42,6 +42,7 @@ define(function main(require, exports, module) {
         Commands            = require("command/Commands"),
         AppInit             = require("utils/AppInit"),
         LiveDevelopment     = require("LiveDevelopment/LiveDevelopment"),
+        RDPBridgeServer     = require("chrome/LiveDevelopment/RDPBridgeServer"),
         Inspector           = require("LiveDevelopment/Inspector/Inspector"),
         CommandManager      = require("command/CommandManager"),
         PreferencesManager  = require("preferences/PreferencesManager"),
@@ -114,7 +115,10 @@ define(function main(require, exports, module) {
 
     /** Toggles LiveDevelopment and synchronizes the state of UI elements that reports LiveDevelopment status */
     function _handleGoLiveCommand() {
-        if (brackets.inBrowser) {
+        if(brackets.chromeApp) {
+            var doc = DocumentManager.getCurrentDocument();
+            window.open(doc.url);
+        } else if (brackets.inBrowser) {
             // not supported in the browser
             Dialogs.showModalDialog(
                 Dialogs.DIALOG_ID_ERROR,
@@ -230,6 +234,9 @@ define(function main(require, exports, module) {
 
         Inspector.init(config);
         LiveDevelopment.init(config);
+        if(brackets.chromeApp)
+            RDPBridgeServer.init();
+
         _loadStyles();
         _setupGoLiveButton();
         _setupGoLiveMenu();
