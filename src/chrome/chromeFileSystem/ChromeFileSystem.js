@@ -49,11 +49,11 @@ define(function (require, exports, module) {
 
     // connect to the node server
     function connect() {
-        _socket = new WebSocket("ws://localhost:9000");
+       /* _socket = new WebSocket("ws://localhost:9000");
         _socket.onopen = _onopen;
         _socket.onerror = _onerror;
         _socket.onclose = _onclose;
-        _socket.onmessage = _onmessage;
+        _socket.onmessage = _onmessage;*/
     }
 
     // forward the method for the module to the node server

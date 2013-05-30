@@ -947,7 +947,7 @@ define(function LiveDevelopment(require, exports, module) {
      */
     UserServerProvider.prototype.canServe = function (localPath) {
         var baseUrl = ProjectManager.getBaseUrl();
-        if (!baseUrl) {
+        if (baseUrl===false || baseUrl == null) {
             return false;
         }
 

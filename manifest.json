@@ -9,8 +9,7 @@
     "app": {
         "background": {
             "scripts": [
-                "chrome-websocket/bundle.js",
-                "chrome-websocket/websocket-server.js",
+                "syncfs-editor/js/background.js",
                 "src/chrome/background.js"
             ]
         }

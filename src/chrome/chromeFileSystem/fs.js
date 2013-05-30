@@ -43,9 +43,7 @@ define(function (require, exports, module) {
     }
 
     function readdir(path, callback) {
-        if(isLegacySystemPath(path)) {
-            ChromeFileSystem.send("fs", "readdir", path, callback);
-        }  else fileSystem.root.getDirectory(path, { create: false }, function(directory){
+        fileSystem.root.getDirectory(path, { create: false }, function(directory){
             directory.createReader().readEntries(function(entries){
                 var returnArray = [];
                 for(var i=0; i<entries.length; i++) {
@@ -59,24 +57,7 @@ define(function (require, exports, module) {
     }
 
     function stat(path, callback) {
-        if(isLegacySystemPath(path)) {
-            ChromeFileSystem.send("fs", "stat", path, function (err, statData) {
-                if (statData && callback) {
-                    statData.isFile = function () { return statData._isFile; };
-                    statData.isDirectory = function () { return statData._isDirectory; };
-                    statData.isBlockDevice = function () { return statData._isBlockDevice; };
-                    statData.isCharacterDevice = function () { return statData._isCharacterDevice; };
-                    statData.isFIFO = function () { return statData._isFIFO; };
-                    statData.isSocket = function () { return statData._isSocket; };
-                    statData.atime = new Date(statData.atime);
-                    statData.mtime = new Date(statData.mtime);
-                    statData.ctime = new Date(statData.ctime);
-                }
-                if (callback) {
-                    callback(err, statData);
-                }
-            });
-        }  else  {
+
             locateFile(path, function(fileEntry) {
                 if(fileEntry == null) {
                     callback(brackets.fs.ERR_NOT_FOUND)
@@ -98,7 +79,7 @@ define(function (require, exports, module) {
 
                 }
             });
-        }
+
     }
 
     function isLegacySystemPath(path) {
@@ -106,9 +87,7 @@ define(function (require, exports, module) {
     }
 
     function readFile(path, encoding, callback) {
-        if(isLegacySystemPath(path))
-            ChromeFileSystem.send("fs", "readFile", path, encoding, callback);
-        else {
+
 
             fileSystem.root.getFile(path, { create: false}, function(fileEntry){
                 if(fileEntry == null) {
@@ -126,7 +105,7 @@ define(function (require, exports, module) {
             }, function (error){
                 callback(brackets.ERR_UNKNOWN);
             });
-        }
+
     }
 
     function writeFile(path, data, encoding, callback) {
@@ -165,7 +144,11 @@ define(function (require, exports, module) {
     }
 
     function makedir (path, mode, callback) {
-        return ChromeFileSystem.send("fs", "mkdir", path, mode, callback);
+        fileSystem.root.getDirectory(path, { create: true}, function() {
+            callback(brackets.fs.NO_ERROR);
+        }, function(err) {
+            callback(err.code)
+        })
     }
 
     exports.NO_ERROR = NO_ERROR;

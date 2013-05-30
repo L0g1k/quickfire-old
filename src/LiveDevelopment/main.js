@@ -117,7 +117,7 @@ define(function main(require, exports, module) {
     function _handleGoLiveCommand() {
         if(brackets.chromeApp) {
             var doc = DocumentManager.getCurrentDocument();
-            window.open(doc.url);
+            //window.open(doc.url);
         } else if (brackets.inBrowser) {
             // not supported in the browser
             Dialogs.showModalDialog(
