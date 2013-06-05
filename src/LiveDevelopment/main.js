@@ -117,7 +117,12 @@ define(function main(require, exports, module) {
     function _handleGoLiveCommand() {
         if(brackets.chromeApp) {
             var doc = DocumentManager.getCurrentDocument();
-            //window.open(doc.url);
+            if(doc.url.indexOf("file:///") == 0) {
+                var url = "http://localhost:8080/" + doc.url.substr(8);
+                window.open(url);
+            }
+
+            return;
         } else if (brackets.inBrowser) {
             // not supported in the browser
             Dialogs.showModalDialog(
@@ -234,6 +239,7 @@ define(function main(require, exports, module) {
 
         Inspector.init(config);
         LiveDevelopment.init(config);
+
         if(brackets.chromeApp)
             RDPBridgeServer.init();
 

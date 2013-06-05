@@ -31,15 +31,18 @@ define(function (require, exports, module) {
 
         if(StringUtils.endsWith(uri, '/')) {
             callback(fileSystem.root.fullPath == uri ? fileSystem.root : fileSystem.root.getDirectory(uri));
-        } else fileSystem.root.getFile(uri, {create: false},
-            function(file) {
-                callback(file);
-            },
-            function(err) {
-                callback(null);
-                console.log(err)
-            }
-        );
+        } else {
+            fileSystem.root.getFile(uri, {create: false},
+                function(file) {
+                    callback(file);
+                },
+                function(err) {
+                    callback(null);
+                    console.log(err)
+                }
+            );
+
+        }
     }
 
     function readdir(path, callback) {
@@ -147,10 +150,42 @@ define(function (require, exports, module) {
         fileSystem.root.getDirectory(path, { create: true}, function() {
             callback(brackets.fs.NO_ERROR);
         }, function(err) {
-            callback(err.code)
+            console.log("Making " + path);
+            if(err.code == 1) {
+              makedirR(path, mode, callback);
+            } else callback(err.code)
         })
-    }
 
+    }
+    var sanity = 0;
+    function makedirR(path, mode, callback, lastDir, i) {
+
+       if(sanity++ > 100) throw 'recursion error'; // recursion condom
+
+       // Folder list
+       var dirs = path.split('/');
+
+        // Init
+       if(!lastDir) {
+           i = path.indexOf('/') == 0 ? 1 : 0;
+           lastDir = fileSystem.root;
+       }
+       var dirToCreate = dirs[i];
+       lastDir.getDirectory(dirToCreate, { create: true }, function(directory) {
+           if(i == dirs.length) {
+               sanity = 0;
+               callback(brackets.fs.NO_ERROR);
+           }  else {
+               lastDir = directory;
+               i++;
+               makedirR(path, mode, callback, lastDir, i);
+
+           }
+       }, callback );
+
+
+       //callback(brackets.fs.NO_ERROR)
+    }
     exports.NO_ERROR = NO_ERROR;
     exports.ERR_UNKNOWN = ERR_UNKNOWN;
     exports.ERR_INVALID_PARAMS = ERR_INVALID_PARAMS;

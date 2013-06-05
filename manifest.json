@@ -9,7 +9,8 @@
     "app": {
         "background": {
             "scripts": [
-                "syncfs-editor/js/background.js",
+                "src/chrome/js/lib/webserver.js",
+                "src/chrome/js/lib/syncFS.js",
                 "src/chrome/background.js"
             ]
         }

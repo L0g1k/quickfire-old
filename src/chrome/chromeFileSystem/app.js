@@ -44,8 +44,7 @@ define(function (require, exports, module) {
     }
 
     function getApplicationSupportDirectory() {
-        console.log("Not implemented in NativeProxy: app.getApplicationSupportDirectory()", arguments);
-        return ".";
+        return "/Application Support/Brackets/extensions/user";
     }
 
     function addMenu() {

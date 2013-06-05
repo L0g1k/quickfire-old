@@ -1,55 +1,4 @@
 (function(){
-    function syncFS() {
-
-        var root = null;
-        var self = this;
-        var init = function () {
-                chrome.syncFileSystem.requestFileSystem(function (fileSystem) {
-                    root = fileSystem.root;
-                });
-            },
-
-            locateFile = function (uri, callback) {
-                console.log("Trying to locate file " + uri);
-                root.getFile(uri, {create: false},
-                function(file) {
-                    callback(file);
-                },
-                function(err) {
-                    callback(null);
-                    console.log(err)
-                })
-
-                //return locateFileInDirectory(uri, root, callback);
-            },
-
-            locateFileInDirectory = function (name, directory, callback) {
-                var found = false
-                directory.createReader().readEntries(function (entries) {
-                    for(var i = 0; i < entries.length; i++) {
-                        var entry = entries[i];
-                        if (typeof entry !== 'undefined') {
-                            console.log("Found entry " + entry.name);
-                            if (entry.isFile) {
-                                if (entry.fullPath == name) {
-                                    found = true;
-                                    entry.file(callback);
-                                }
-                            } else {
-                                locateFileInDirectory(name, directory, callback);
-                            }
-                        }
-                    }
-                });
-                // Hacky way to determine if the file wasn't found.
-                setTimeout(function() { if(!found) callback(null)}, 500);
-            }
-
-        return { init: init, locateFile: locateFile }
-    }
-
-
-
 
     var require = function (file, cwd) {
         var resolved = require.resolve(file, cwd || '/');
@@ -6272,29 +6221,7 @@
      * Start code
      */
     var http = require('http');
-    var syncFS = new syncFS();
-    syncFS.init();
-    var requestListener = function (req, res) {
-        console.log("Request: ", req);
-        syncFS.locateFile(req.url, function(fileEntry){
-            if(fileEntry != null) {
-                res.writeHead(200);
-                fileEntry.file(function(file){
-                    var reader = new FileReader();
-                    reader.readAsText(file, "utf-8");
-                    reader.onload = function(ev) {
-                        res.end(ev.target.result);
-                    };
-                });
-            } else {
-                res.writeHead(404);
-                res.end();
-            }
-        });
-    }
 
-    //var server = http.createServer(requestListener);
-    //server.listen(8080);
     window.httpChromify = http;
 
 })()
