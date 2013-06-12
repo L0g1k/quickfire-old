@@ -740,7 +740,7 @@ define(function (require, exports, module) {
 
         // resolve relative paths relative to the DirectoryEntry
         if (isRelativePath(path)) {
-            directoryFullPath = this.fullPath + path;
+            directoryFullPath = (this.fullPath || "") + path;
         }
 
         var createDirectoryEntry = function () {

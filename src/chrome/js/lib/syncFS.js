@@ -2,14 +2,20 @@ function syncFS() {
 
     var root = null;
     var self = this;
-    var init = function () {
+    var init = function (callback) {
             chrome.syncFileSystem.requestFileSystem(function (fileSystem) {
                 root = fileSystem.root;
+                console.log("Initialised sync FS");
+                if(callback) {
+                    callback();
+                }
             });
         },
 
         locateFile = function (uri, callback) {
             console.log("Trying to locate file " + uri);
+            if(!root)
+                throw 'SyncFS file system was not initialised. Check that you are signed into Chrome';
             root.getFile(uri, {create: false},
                 function(file) {
                     callback(file);

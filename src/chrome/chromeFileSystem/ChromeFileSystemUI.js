@@ -43,7 +43,7 @@ define(function (require, exports, module) {
     }
 
     function _showOpenDialog(allowMultipleSelection, chooseDirectory, title, initialPath, fileTypes, callback) {
-        var handler = chooseDirectory ? _showOpenFolderDialog : _showOpenFileDialog;
+        /*var handler = chooseDirectory ? _showOpenFolderDialog : _showOpenFileDialog;
         var r = handler();
         $input.select().focus();
         r.then(function (id) {
@@ -52,7 +52,10 @@ define(function (require, exports, module) {
                 paths.push($input.val());
             }
             callback(undefined, paths);
-        }, callback);
+        }, callback); */
+        chrome.fileSystem.chooseEntry(function(entry){
+            callback(entry);
+        });
     }
 
     function _showConnectErrorDialog(callback) {

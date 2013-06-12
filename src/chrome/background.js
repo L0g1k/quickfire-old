@@ -1,30 +1,51 @@
-chrome.app.runtime.onLaunched.addListener(function (arg) {
-    chrome.app.window.create(
-        'src/main.html',
-        { bounds: { width:780, height:490}, type:"shell" });
-});
+function launchEditor() {
+    chrome.app.runtime.onLaunched.addListener(function (arg) {
+        chrome.app.window.create(
+            'src/main.html',
+            { bounds: { width:780, height:490}, type:"shell" });
+    });
+}
 
-var syncFS = new syncFS();
-syncFS.init();
-var requestListener = function (req, res) {
-    console.log("Request: ", req);
-    syncFS.locateFile(req.url, function(fileEntry){
-        if(fileEntry != null) {
-            res.writeHead(200);
-            fileEntry.file(function(file){
-                var reader = new FileReader();
-                reader.readAsText(file, "utf-8");
-                reader.onload = function(ev) {
-                    res.end(ev.target.result);
-                };
+function startWebServer(port) {
+    setTimeout(function () {
+        chrome.syncFileSystem.requestFileSystem(function (fs) {
+            if(chrome.runtime.lastError) {
+                console.error(chrome.runtime.lastError.message)
+            } else {
+                new WebServerSimple("127.0.0.1", port || 8080, fs);
+                loadDemos(fs);
+            }
+        });
+    }, 500);
+}
+
+function loadDemos(fs) {
+    var alwaysDemo = true;
+    if(alwaysDemo) {
+        require(["src/chrome/demos/DemoLoader"], function(DemoLoader){
+            console.log(DemoLoader);
+            DemoLoader.loadDemos(fs);
+        });
+    }
+    chrome.runtime.onInstalled.addListener(function(details){
+        console.log(details);
+        if(details.reason = "install") {
+            require(["src/chrome/demos/DemoLoader"], function(DemoLoader){
+                console.log(DemoLoader);
+                DemoLoader.loadDemos(fs);
             });
-        } else {
-            res.writeHead(404);
-            res.end();
         }
     });
 }
 
-var server = httpChromify.createServer(requestListener);
-server.listen(8080);
-console.log("Main webserver started on port 8080");
+setTimeout(function () {
+
+    try {
+        launchEditor();
+
+        startWebServer(8080);
+    } catch (e) {
+        console.error("Fatal: can't start web server", e.stack);
+    }
+
+}, 5000);

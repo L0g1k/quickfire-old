@@ -101,7 +101,7 @@ define(function (require, exports, module) {
             ChromeFileSystemUI      = require("chrome/chromeFileSystem/ChromeFileSystemUI"),
             ChromeFileSystem      = require("chrome/chromeFileSystem/ChromeFileSystem");
         // load the proxy if running in browser
-        if (brackets.isChromeApp)
+        if (brackets.chromeApp)
             ChromeFileSystemUI.init();
         else if (brackets.inBrowser)
             NativeProxyUI.init();
@@ -170,8 +170,8 @@ define(function (require, exports, module) {
         }
 
         function _onReady() {
+            console.log('Ready');
             PerfUtils.addMeasurement("window.document Ready");
-
             EditorManager.setEditorHolder($("#editor-holder"));
 
             // Use quiet scrollbars if we aren't on Lion. If we're on Lion, only
@@ -337,5 +337,5 @@ define(function (require, exports, module) {
                 });
             } else ready();
         });
-    }, 5000);
+    }, 1);
 });

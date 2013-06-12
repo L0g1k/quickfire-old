@@ -817,7 +817,7 @@
             // Create a new socket for the handle the response.
             var self = this;
             var socket = new net.Socket();
-
+            socket.writable = true;
             socket._socketInfo = acceptInfo;
             self.emit("connection", socket);
 
@@ -847,7 +847,7 @@
             this._type = allowHalfOpen = options.allowHalfOpen || false;
             this._socketInfo = 0;
             this._encoding;
-
+            this.writable = false;
             if(createNew){
                 chrome.socket.create("tcp", {}, function(createInfo) {
                     self._socketInfo = createInfo;
@@ -902,9 +902,10 @@
             self.on('connect', cb);
 
             chrome.socket.connect(self._socketInfo.socketId, options.host, options.port, function(result) {
+                console.log("chrome.socket.connect");
                 if(result == 0) {
                     self.emit('connect');
-                    self.writable = true;
+                    console.log("chrome.socket.connect");
                 }
                 else {
                     self.emit('error', new Error("Unable to connect"));
@@ -915,6 +916,7 @@
         net.Socket.prototype.destroy = function() {
             chrome.socket.disconnect(this._socketInfo.socketId);
             chrome.socket.destroy(this._socketInfo.socketId);
+            this.writable = false;
             clearTimeout(this._readTimer);
         };
         net.Socket.prototype.destroySoon = function() {
@@ -976,9 +978,11 @@
             self._resetTimeout();
 
             chrome.socket.write(self._socketInfo.socketId, buffer, function(writeInfo) {
-                callback();
-            });
 
+                if(callback)
+                    callback();
+            });
+            //this.writable = false;
             return true;
         };
 
@@ -3464,6 +3468,8 @@
                 this.info.headers[match[1].toLowerCase()] = match[2];
             }
             else {
+                var c = this.info.headers['connection'];
+                //this.info.shouldKeepAlive = c && c == 'keep-alive';
                 this.onHeadersComplete(this.info);
                 this.state = "BODY";
             }
@@ -3528,7 +3534,7 @@
         if (process.env.NODE_DEBUG && /http/.test(process.env.NODE_DEBUG)) {
             debug = function(x) { console.error('HTTP: %s', x); };
         } else {
-            debug = function() { };
+            debug = function() { console.log(arguments)};
         }
 
 // Only called in the slow case where slow means
@@ -3953,7 +3959,7 @@
 
 
 // This abstract either writing directly to the socket or buffering it.
-        OutgoingMessage.prototype._send = function(data, encoding) {
+        OutgoingMessage.prototype._send = function(data, encoding, callback) {
             // This is a shameful hack to get the headers and first body chunk onto
             // the same packet. Future versions of Node are going to take care of
             // this at a lower level and in a more general way.
@@ -3966,11 +3972,11 @@
                 }
                 this._headerSent = true;
             }
-            return this._writeRaw(data, encoding);
+            return this._writeRaw(data, encoding, callback);
         };
 
 
-        OutgoingMessage.prototype._writeRaw = function(data, encoding) {
+        OutgoingMessage.prototype._writeRaw = function(data, encoding, callback) {
             if (data.length === 0) {
                 return true;
             }
@@ -3990,7 +3996,7 @@
                 }
 
                 // Directly write to socket.
-                return this.connection.write(data, encoding);
+                return this.connection.write(data, encoding, callback);
             } else {
                 this._buffer(data, encoding);
                 return false;
@@ -4193,7 +4199,7 @@
 
 
 
-        OutgoingMessage.prototype.write = function(chunk, encoding) {
+        OutgoingMessage.prototype.write = function(chunk, encoding, callback) {
             if (!this._header) {
                 this._implicitHeader();
             }
@@ -4215,7 +4221,7 @@
                 if (typeof(chunk) === 'string') {
                     len = Buffer.byteLength(chunk, encoding);
                     chunk = len.toString(16) + CRLF + chunk + CRLF;
-                    ret = this._send(chunk, encoding);
+                    ret = this._send(chunk, encoding, callback);
                 } else {
                     // buffer
                     len = chunk.length;
@@ -4275,9 +4281,7 @@
                 this.connection &&
                 this.connection.writable &&
                 this.connection._httpMessage === this;
-              // FIXME: hack - connection.writable is undefined and it's not supposed to be - just setting hot to true
-            // because i know that i'm using it that way.
-            hot = true;
+
             if (hot) {
                 // Hot path. They're doing
                 //   res.writeHead();

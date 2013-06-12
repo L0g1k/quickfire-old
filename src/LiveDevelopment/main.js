@@ -117,8 +117,8 @@ define(function main(require, exports, module) {
     function _handleGoLiveCommand() {
         if(brackets.chromeApp) {
             var doc = DocumentManager.getCurrentDocument();
-            if(doc.url.indexOf("file:///") == 0) {
-                var url = "http://localhost:8080/" + doc.url.substr(8);
+            if(doc.url.indexOf("file://") == 0) {
+                var url = "http://localhost:8080/" + doc.url.substr(7);
                 window.open(url);
             }
 

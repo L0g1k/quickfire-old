@@ -1,11 +1,12 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
 /*global define, chrome */
-
+var log = function() { console.log(arguments) };
+function debugApp() { chrome.syncFileSystem.requestFileSystem(function(fileSystem) { window.fileSystem = fileSystem }) };
 define(function (require, exports, module) {
     "use strict";
 
     var ChromeFileSystem = require("./ChromeFileSystem");
-    var StringUtils = require("utils/StringUtils");
+    var StringUtils = require("../../utils/StringUtils");
     var NO_ERROR = 0;
     var ERR_UNKNOWN = 1;
     var ERR_INVALID_PARAMS = 2;
@@ -30,18 +31,37 @@ define(function (require, exports, module) {
         console.log("Trying to locate file " + uri);
 
         if(StringUtils.endsWith(uri, '/')) {
-            callback(fileSystem.root.fullPath == uri ? fileSystem.root : fileSystem.root.getDirectory(uri));
+            if(fileSystem.root.fullPath == uri) {
+                callback(fileSystem.root);
+            }
+            var path = uri.substr(0, uri.length - 1);
+            asDirectory(path, callback);
         } else {
             fileSystem.root.getFile(uri, {create: false},
                 function(file) {
                     callback(file);
                 },
                 function(err) {
-                    callback(null);
-                    console.log(err)
+
+                    if(err.code == 11) {
+                        asDirectory(path, callback);
+                    } else {
+                        callback(null);
+                        console.log("Error " + err.code + " while locating " + uri, FileError.prototype);
+                    }
+
                 }
             );
 
+        }
+
+        function asDirectory(path, callback) {
+            fileSystem.root.getDirectory(
+                path, { create: false }, function(directoryEntry){
+                    callback(directoryEntry);
+                }, function(err){
+                    callback(null);
+                });
         }
     }
 
@@ -116,22 +136,27 @@ define(function (require, exports, module) {
         fileSystem.root.getFile(
             path, { create: true },
             function(entry) {
-                entry.createWriter(function (writer) {
-                    writer.truncate(0);
-                    writer.onerror = function(err) {
-                        callback(err.code)
-                    }
-                    writer.onwriteend = function() {
-                        var blob = new Blob([data]);
-                        var size = data.length;
-                        writer.write(blob);
-                        writer.onwriteend = function(){
-                            callback(brackets.fs.NO_ERROR);
-                        };
-                    }.bind(this);
-                }.bind(this));
-            }.bind(this));
+                writeText(data, entry, encoding, callback);
+            }.bind(this), callback);
         //return ChromeFileSystem.send("fs", "writeFile", path, data, encoding, callback);
+    }
+
+    function writeText(data, entry, encoding, callback) {
+        entry.createWriter(function (writer) {
+            //writer.truncate(0);
+            writer.onerror = function(err) {
+                callback(err.code)
+            };
+            writer.onwriteend = function() {
+               callback(brackets.fs.NO_ERROR);
+            };
+
+            var blob = new Blob([data]);
+            var size = data.length;
+
+            writer.write(blob);
+
+        });
     }
 
     function chmod(path, mode, callback) {
@@ -156,6 +181,48 @@ define(function (require, exports, module) {
             } else callback(err.code)
         })
 
+    }
+    function makeAndGetdir (path, mode, callback) {
+        fileSystem.root.getDirectory(path, { create: true}, function(entry) {
+            callback(entry);
+        }, function(err) {
+            console.log("Making " + path);
+            if(err.code == 1) {
+                makeAndGetdirR(path, mode, callback);
+            } else {
+                console.error("File error " + err.code, FileError.prototype);
+                callback(err.code)
+            }
+        })
+
+    }
+    function makeAndGetdirR(path, mode, callback, lastDir, i) {
+
+        if(sanity++ > 100) throw 'recursion error'; // recursion condom
+
+        // Folder list
+        var dirs = path.split('/');
+
+        // Init
+        if(!lastDir) {
+            i = path.indexOf('/') == 0 ? 1 : 0;
+            lastDir = fileSystem.root;
+        }
+        var dirToCreate = dirs[i];
+        lastDir.getDirectory(dirToCreate, { create: true }, function(directory) {
+            if(i == dirs.length) {
+                sanity = 0;
+                callback(directory);
+            }  else {
+                lastDir = directory;
+                i++;
+                makedirR(path, mode, callback, lastDir, i);
+
+            }
+        }, callback );
+
+
+        //callback(brackets.fs.NO_ERROR)
     }
     var sanity = 0;
     function makedirR(path, mode, callback, lastDir, i) {
@@ -201,9 +268,11 @@ define(function (require, exports, module) {
     exports.stat = stat;
     exports.readFile = readFile;
     exports.writeFile = writeFile;
+    exports.writeText = writeText;
     exports.chmod = chmod;
     exports.unlink = unlink;
     exports.cwd = cwd;
     exports.makedir = makedir;
+    exports.makeAndGetdir = makeAndGetdir;
     exports.init = init;
 });

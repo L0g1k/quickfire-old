@@ -39,6 +39,7 @@ define(function (require, exports, module) {
 
     require("utils/Global");
 
+    var extensionsEnabled = false;
     var NativeFileSystem    = require("file/NativeFileSystem").NativeFileSystem,
         FileUtils           = require("file/FileUtils"),
         Async               = require("utils/Async");
@@ -257,7 +258,7 @@ define(function (require, exports, module) {
      * @return {!$.Promise} A promise object that is resolved when all extensions complete loading.
      */
     function init(paths) {
-        if (_init) {
+        if (_init || !extensionsEnabled) {
             // Only init once. Return a resolved promise.
             return new $.Deferred().resolve().promise();
         }

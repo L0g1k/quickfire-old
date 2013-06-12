@@ -9,11 +9,15 @@
     "app": {
         "background": {
             "scripts": [
-                "src/chrome/js/lib/webserver.js",
+                "src/thirdparty/require.js",
+                "src/chrome/js/lib/web-server-simple.js",
                 "src/chrome/js/lib/syncFS.js",
+                "syncfs-editor/js/background.js",
                 "src/chrome/background.js"
             ]
         }
     },
-    "permissions": [{"socket":["tcp-connect", "tcp-listen"]}, "syncFileSystem"]
+    "permissions": [{"socket":["tcp-connect", "tcp-listen"]}, "syncFileSystem", "fileSystem", "fileSystem.write"],
+    "offline_enabled": true
+
 }

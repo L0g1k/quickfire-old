@@ -754,7 +754,7 @@ define(function (require, exports, module) {
      * first launch. 
      */
     function getInitialProjectPath() {
-        return brackets.chromeApp ? "/" : updateWelcomeProjectPath(_prefs.getValue("projectPath"));
+        return brackets.chromeApp ? "Getting Started/" : updateWelcomeProjectPath(_prefs.getValue("projectPath"));
     }
     
     /**
