@@ -1,3 +1,11 @@
+/**
+ * Here, we pretend to be the Chrome browser. Brackets connects to us, and we faithfully respond to it's RDP messages.
+ *
+ * This file is infact running in the packaged app, alongside Brackets.
+ *
+ * To communicate with the real page
+ */
+
 define(function RDPBridgeServer(require, exports, module) {
 
     var wss;
@@ -5,12 +13,13 @@ define(function RDPBridgeServer(require, exports, module) {
     var portsUsed = 9001;
 
     function init() {
-        initWebsocketServer();
-        initWebserver();
+        console.log("Initialising remote debug emulator");
+        this.initWebsocketServer();
+        this.initWebserver();
     }
 
     // use this so we can communicate with the quickfire devtools chrome extension
-    function initWebsocketServer() {
+    this.initWebsocketServer = function() {
         var port = 8999;
         wss = new WebSocketServer(port, "127.0.0.1");
         wss.onMessage(handleChromeExtensionMessage.bind(this));
@@ -18,7 +27,7 @@ define(function RDPBridgeServer(require, exports, module) {
     }
 
     // emulate chrome remote debug manager - port comes from Inspector.js getDebuggableWindows
-    function initWebserver() {
+    this.initWebserver = function() {
        var requestListener = function (req, res) {
            console.log("Request: ", req);
            res.writeHead(200, {
@@ -40,8 +49,51 @@ define(function RDPBridgeServer(require, exports, module) {
         server.listen(9222);
     }
 
-    function handleChromeExtensionMessage(message) {
-        console.log("Handling Chrome extension message ", message);
+    function handleChromeExtensionMessage(_message) {
+
+        console.log("Handling Chrome extension message ", _message);
+
+        var message = JSON.parse(_message.substr(1, _message.length-1));
+        var method = message.method, id = message.id, params = message.params;
+        var methodCamelCased = this.methodCamelCased(method);
+        var func = this['handle' + methodCamelCased];
+        if(func)
+            func.call(method.id, method.params);
+        else {
+            console.warn("Unknown message ", message);
+        }
+    }
+
+    this.handleRuntimeEvaluate = function(id, params) {
+        console.log("Evaluating", params);
+    }
+
+    this.handleCallFunctionOn = function(id, params) {
+        console.log("Calling function on", params);
+    }
+
+    this.methodCamelCased = function(method) {
+        var ret = "";
+        if(method.indexOf(".") == -1) {
+            return method;
+        } else {
+            var dot = false;
+            for(var i=0; i<method.length; i++) {
+                if(dot) {
+                    ret += method.charAt(i).toUpperCase();
+                    dot = false;
+                } else {
+                    var c = method.charAt(i);
+                    if(c == ".") {
+                        dot = true;
+                    } else ret += method.charAt(i);
+                }
+
+            }
+
+
+        }
+        return ret;
     }
 
     function onPageOpened(tabId) {

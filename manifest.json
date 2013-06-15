@@ -12,7 +12,6 @@
                 "src/thirdparty/require.js",
                 "src/chrome/js/lib/web-server-simple.js",
                 "src/chrome/js/lib/syncFS.js",
-                "syncfs-editor/js/background.js",
                 "src/chrome/background.js"
             ]
         }

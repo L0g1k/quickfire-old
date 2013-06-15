@@ -20,7 +20,7 @@ function startWebServer(port) {
 }
 
 function loadDemos(fs) {
-    var alwaysDemo = true;
+    var alwaysDemo = false;
     if(alwaysDemo) {
         require(["src/chrome/demos/DemoLoader"], function(DemoLoader){
             console.log(DemoLoader);

@@ -122,7 +122,7 @@ define(function main(require, exports, module) {
                 window.open(url);
             }
 
-            return;
+            //return;
         } else if (brackets.inBrowser) {
             // not supported in the browser
             Dialogs.showModalDialog(

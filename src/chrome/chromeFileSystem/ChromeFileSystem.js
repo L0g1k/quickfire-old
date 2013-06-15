@@ -88,6 +88,7 @@ define(function (require, exports, module) {
 
     function ready(callback) {
         fs.init(callback);
+        console.log($(".dropdown-menu"));
     }
     exports.connect = connect;
     exports.send = send;
