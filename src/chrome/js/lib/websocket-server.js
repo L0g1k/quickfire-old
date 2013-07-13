@@ -210,6 +210,7 @@
 
             net.Socket = function(options) {
                 var createNew = false;
+                var allowHalfOpen;
                 if(options){
                     createNew = true;
                 }
@@ -3742,6 +3743,9 @@
     }
 
     WebSocketServer.prototype.send = function(message) {
+        if(typeof message == 'object') {
+            message = JSON.stringify(message);
+        }
         if(typeof this.socket !== 'undefined') {
             var data = encodeWebSocket(message);
             this.socket.write(data);
